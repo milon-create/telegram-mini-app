@@ -1,39 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Telegram Mini App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telegram Mini App Pro</title>
+
+<!-- Telegram SDK -->
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 <style>
+:root{
+  --bg:#0b1220;
+  --card:#111827;
+  --primary:#3b82f6;
+  --text:#ffffff;
+  --muted:#9ca3af;
+}
+
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
-  font-family: Arial, sans-serif;
-  background:#0f172a;
-  color:white;
+  font-family: system-ui, Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
+
 .header{
-  padding:20px;
+  padding:18px;
   text-align:center;
-  background:#020617;
+  background:linear-gradient(135deg,#1e3a8a,#2563eb);
+  font-size:20px;
+  font-weight:600;
 }
+
+.container{
+  padding:16px;
+}
+
 .card{
-  background:#020617;
-  margin:15px;
-  padding:20px;
-  border-radius:12px;
+  background:var(--card);
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:16px;
 }
+
+.card h3{
+  margin:0 0 10px;
+}
+
 .btn{
   width:100%;
   padding:14px;
   border:none;
-  border-radius:10px;
-  background:#2563eb;
+  border-radius:12px;
+  background:var(--primary);
   color:white;
   font-size:16px;
+  font-weight:600;
 }
-.small{
-  opacity:0.7;
+
+.btn:active{
+  opacity:.8;
+}
+
+.info{
   font-size:14px;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.footer{
+  text-align:center;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:20px;
 }
 </style>
 </head>
@@ -41,30 +84,57 @@ body{
 <body>
 
 <div class="header">
-  <h2>🚀 Mini App Dashboard</h2>
+  🚀 Telegram Mini App
 </div>
 
-<div class="card">
-  <p id="user">Loading...</p>
-  <button class="btn" onclick="loadUser()">Load Profile</button>
-</div>
+<div class="container">
 
-<div class="card">
-  <p class="small">📢 Ad Section (Coming Soon)</p>
+  <div class="card">
+    <h3>👤 User Profile</h3>
+    <div id="userInfo" class="info">Loading user...</div>
+    <br>
+    <button class="btn" onclick="loadUser()">Load Profile</button>
+  </div>
+
+  <div class="card">
+    <h3>📢 Advertisement</h3>
+    <div class="info">
+      Ad will be shown here<br>
+      (Monetag / Other Network)
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⚙️ System</h3>
+    <div class="info">
+      Version: <b>1.0.0</b><br>
+      Status: <b>Active</b>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2025 Mini App | Powered by GitHub Pages
+  </div>
+
 </div>
 
 <script>
+// Telegram Ready
 Telegram.WebApp.ready();
+Telegram.WebApp.expand();
 
+// Load User
 function loadUser(){
-  let u = Telegram.WebApp.initDataUnsafe.user;
-  if(u){
-    document.getElementById("user").innerHTML =
-      "👤 Name: " + u.first_name + "<br>" +
-      "🆔 ID: " + u.id;
+  const user = Telegram.WebApp.initDataUnsafe.user;
+
+  if(user){
+    document.getElementById("userInfo").innerHTML =
+      "Name: <b>" + user.first_name + "</b><br>" +
+      "Username: @" + (user.username || "N/A") + "<br>" +
+      "User ID: " + user.id;
   }else{
-    document.getElementById("user").innerText =
-      "Open this app from Telegram";
+    document.getElementById("userInfo").innerText =
+      "Please open this app from Telegram.";
   }
 }
 </script>
