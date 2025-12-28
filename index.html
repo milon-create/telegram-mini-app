@@ -1,29 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<title>Milon Create</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Monetag verification -->
-  <meta name="monetag" content="aa0e780788f4a3a2eec433c984994849">
+<!-- Telegram Mini App -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telegram Mini App</title>
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  font-family:Arial,sans-serif;
+}
+.card{
+  background:#0b1220;
+  padding:30px;
+  border-radius:16px;
+  text-align:center;
+  width:90%;
+  max-width:350px;
+  box-shadow:0 0 30px rgba(0,0,0,0.4);
+}
+h1{
+  color:#fff;
+  margin-bottom:10px;
+}
+p{
+  color:#9aa4b2;
+  font-size:14px;
+}
+button{
+  margin-top:20px;
+  padding:14px;
+  width:100%;
+  border:none;
+  border-radius:12px;
+  background:#5865f2;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+</style>
 </head>
-<body>
 
-<h2>Welcome to My Telegram Mini App</h2>
-<p>Monetag verification & ads enabled.</p>
+<body>
+<div class="card">
+  <h1>🚀 Milon Create</h1>
+  <p>Telegram Mini App System</p>
+  <button onclick="openBot()">Open Bot</button>
+</div>
 
 <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-      .then(function(reg) {
-        console.log('Service Worker registered', reg);
-      })
-      .catch(function(err) {
-        console.log('Service Worker error', err);
-      });
-  }
+const tg = window.Telegram.WebApp;
+tg.expand();
+
+function openBot(){
+  tg.openTelegramLink("https://t.me/taskincome_milon_bot");
+}
 </script>
 
 </body>
