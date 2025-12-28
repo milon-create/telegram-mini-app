@@ -1,40 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Telegram Mini App</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    body {
-      font-family: Arial;
-      background: #f5f5f5;
-      text-align: center;
-      padding: 40px;
-    }
-    button {
-      padding: 12px 20px;
-      font-size: 16px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>My Telegram Mini App</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#0f172a;
+  color:white;
+}
+.header{
+  padding:20px;
+  text-align:center;
+  background:#020617;
+}
+.card{
+  background:#020617;
+  margin:15px;
+  padding:20px;
+  border-radius:12px;
+}
+.btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+}
+.small{
+  opacity:0.7;
+  font-size:14px;
+}
+</style>
 </head>
+
 <body>
 
-<h2>Welcome to My Telegram Mini App</h2>
-<p id="user"></p>
+<div class="header">
+  <h2>🚀 Mini App Dashboard</h2>
+</div>
 
-<button onclick="showUser()">Show Telegram User</button>
+<div class="card">
+  <p id="user">Loading...</p>
+  <button class="btn" onclick="loadUser()">Load Profile</button>
+</div>
+
+<div class="card">
+  <p class="small">📢 Ad Section (Coming Soon)</p>
+</div>
 
 <script>
-  function showUser() {
-    let user = Telegram.WebApp.initDataUnsafe.user;
-    if (user) {
-      document.getElementById("user").innerText =
-        "Hello " + user.first_name;
-    } else {
-      document.getElementById("user").innerText =
-        "Open this app from Telegram";
-    }
+Telegram.WebApp.ready();
+
+function loadUser(){
+  let u = Telegram.WebApp.initDataUnsafe.user;
+  if(u){
+    document.getElementById("user").innerHTML =
+      "👤 Name: " + u.first_name + "<br>" +
+      "🆔 ID: " + u.id;
+  }else{
+    document.getElementById("user").innerText =
+      "Open this app from Telegram";
   }
+}
 </script>
 
 </body>
